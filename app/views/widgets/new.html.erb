@@ -3,4 +3,27 @@
 <p> This is the 'new' view page.  Conventionally, this is where you would place your form that would CREATE a new record in your database.</p>
 </br>
 
-<h3> Here is the form:</h3>
+<a href="/"><button>Return to Index page</button></a>
+
+<h3> Here is the form below.  If you look at the code for the controller, you'll remember that before rendering this page, we told Rails to pass an instance variable called "@new_widget", which is a new, blank record in our Model.  Using this, Rails knows what to do whene the form is created.</h3>
+
+<%= form_for @new_widget do |f| %>
+  <%= f.text_field :name, placeholder: "Enter name" %>
+  <%= f.text_field :quantity, placeholder: "Enter quantity" %>
+  <%= f.submit %>
+<% end %>
+
+<p> This form has two fields for the user to fill in, and so in our 'form_for' we have two attributes: :name and :quantity.</p>
+
+<p>This means that, when this information is routed back to the controller (specifically the 'create' method), the params hash looks like this:</p>
+
+<h4> params = {name: x, quantity: y} </h4>
+<p> where 'x' and 'y' are whatever the user enters into the fields above.</p>
+
+<p>-------------------------------------------</p>
+
+<p> Using this form, Rails automatically knows to route to "GET '/widgets/create'" when the "Create Widget" button is clicked.</p>
+<p> This is because we gave the form a new, empty record in the Model.  Rails is magic, so it notices that, and knows how to deal with it.</p>
+
+<p>.....</p>
+<p>MAGIC!</p>
