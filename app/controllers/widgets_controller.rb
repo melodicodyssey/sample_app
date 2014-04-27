@@ -131,6 +131,7 @@ class WidgetsController < ApplicationController
   end
 
   def bar
+    render 'foobar'
   end
 
 end
