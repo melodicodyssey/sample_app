@@ -11,11 +11,16 @@
 
 <ul>
   <% @all_widgets.each do |widget| %>
+    <a href="/widgets/<%= widget.id %>"><button>Show</button></a>
     <%= widget.name %> -- <%= widget.quantity %>
-    </br>
+    <%= form_for widget, {method: :delete} do |f|%>
+      <%= f.submit "Delete widget" %>
+    <% end %>
   <% end %>
 </ul>
 
 <h4> The actual instance variable @all_widgets, in its raw form, looks like this: </h4>
 
 <%= @all_widgets %>
+
+<h4> All data collected from your models are instances of the ActiveRecord object.  This will become important later</h4>

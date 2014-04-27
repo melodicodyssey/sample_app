@@ -5,7 +5,7 @@
 
 <a href="/"><button>Return to Index page</button></a>
 
-<h3> Here is the form below.  If you look at the code for the controller, you'll remember that before rendering this page, we told Rails to pass an instance variable called "@new_widget", which is a new, blank record in our Model.  Using this, Rails knows what to do whene the form is created.</h3>
+<h3> Here is the form below.</h3>  
 
 <%= form_for @new_widget do |f| %>
   <%= f.text_field :name, placeholder: "Enter name" %>
@@ -13,17 +13,39 @@
   <%= f.submit %>
 <% end %>
 
-<p> This form has two fields for the user to fill in, and so in our 'form_for' we have two attributes: :name and :quantity.</p>
+<p> Before rendering this page, we told Rails to pass an instance variable called "@new_widget", which is a new, blank record in our Model.  Using this, Rails knows what to do when the form is created.  RAILS IS MAGIC.</p>
 
-<p>This means that, when this information is routed back to the controller (specifically the 'create' method), the params hash looks like this:</p>
+<p> This form has two fields for the user to fill in, and so in our 'form_for' we have two attributes: :name and :quantity.  This means that, when we exit this page after submitting the form, the params hash looks like this:</p>
 
-<h4> params = {name: x, quantity: y} </h4>
+<h4> params = {widget: {name: x, quantity: y}} </h4>
 <p> where 'x' and 'y' are whatever the user enters into the fields above.</p>
 
 <p>-------------------------------------------</p>
 
-<p> Using this form, Rails automatically knows to route to "GET '/widgets/create'" when the "Create Widget" button is clicked.</p>
-<p> This is because we gave the form a new, empty record in the Model.  Rails is magic, so it notices that, and knows how to deal with it.</p>
+<h4> When this form is submitted, this is what happens internally in Rails:</h4>
 
-<p>.....</p>
-<p>MAGIC!</p>
+<ol>
+  <li> Activates a POST request to a route called "/widgets" </li>
+  <li> Rails sees that one of its routes matches this request:
+    <ul>
+      <li> POST '/widgets', to: 'widgets#create'" </li>
+    </ul>
+  </li>
+  <li> The Router follows protocol and dials up the corresponding Controller and Action attached to that route.
+    <ul>
+      <li> In this case, dialing up WidgetsController and specifically calling the 'create' method.</li>
+    </ul>
+  </li>
+  <li> When Rails arrives at the 'create' method inside WidgetsController, it still has the 'params' hash that was sent from this page.
+    <ul>
+      <li> So we will be able to immediately make use of:
+        <ol>
+          <li> params[:name] == "x"</li>
+          <li> params[:quantity] == "y"</li>
+        </ol>
+        in the 'create' method of the controller.
+      </li>
+    </ul>
+  </li>
+  <li> After we successfully add the new Widget to our database, we will redirect to one of our views at the end of the 'create' method.  The 'create' method is purely for back-end purposes, and is not meant to give anything to the user.  We will have another method do that, in order to separate concerns.</li>
+</ol>

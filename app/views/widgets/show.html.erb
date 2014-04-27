@@ -1,7 +1,22 @@
 <h1> show.html.erb </h1>
-</br>
+
+<a href="/"><button>Return to Index</button></a>
+
 <p> This is the 'show' page.  Conventionally, you will need to have a specific ID in the route that leads here, so that the information displayed on this page will only be for a specific record in your database.</p>
-<p> You likely clicked on one of the widgets from the Index page to get here.  When you clicked on it, it routed to 'GET "/widgets/:id"' where ':id' is the serial number in the database that I was able to use to look up the correct record to display here.</p>
+
+<h3> Look at the URL right now.  The widget you clicked on is ID# <%= @widget.id %> in the Model, so that is the number that is included in the route.</h3>
+
 </br>
 
-<h3>Does the information below match what you clicked?</h3>
+<h3>Does the information below match what you clicked or created?</h3>
+
+<%= @widget.name %> -- <%= @widget.quantity %>
+
+
+</br>
+
+<a href="/widgets/<%= @widget.id %>/edit"><button>Edit this widget</button></a>
+
+<%= form_for @widget, {method: :delete} do |f|%>
+  <%= f.submit "Delete widget" %>
+<% end %>

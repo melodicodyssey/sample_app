@@ -1,6 +1,25 @@
 <h1>edit.html.erb</h1>
-</br>
+
+<a href="/"><button>Return to Index</button></a>
+
 <p> Following RESTful convention, this is the view you would dedicate to placing a form to update one or more of your Models.  Within the scope of this class, the edit form will be very similar to the 'new' form.</p>
 </br>
 
 <h3> Here is the form: </h3>
+
+<p>Update fields:</p>
+<%= form_for @widget do |f| %>
+  <%= f.text_field :name, value: @widget.name %>
+  <%= f.text_field :quantity, value: @widget.quantity %>
+  <%= f.submit %>
+<% end %>
+
+<%= form_for @widget, {method: :delete} do |f|%>
+  <%= f.submit "Delete widget" %>
+<% end %>
+
+<p> There is absolutely no difference between how this form is set up, and how the form in 'new.html.erb' is set up.  The only difference Rails cares about is whether or not the instance variable passed from the controller is of a NEW record in the model, or of an EXISTING record in the model.</p>
+
+<p> For our 'new' form, the variable we passed to the view was a NEW record (recall: @new_widget = Widget.new), so Rails automatically knew to treat that form as one that was CREATING, and so it knew to make a POST request when the form was submitted.</p>
+
+<p> For this 'edit' form, the variable we passed to this view is an EXISTING record (@widget = Widget.find_by(id: widget_id)), so Rails automatically knows to treat this form as one that is UPDATING, so it knows to make a PUT request when this form is submitted.
