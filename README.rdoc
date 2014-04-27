@@ -1,12 +1,16 @@
-This is a sample Rails application meant to illustrate how MVC/route behavior works.
+<h1> Sample Widget app<h1>
 
-To use this app, clone it into your local repository, then run:
+<h4>This is a sample Rails application meant to illustrate how MVC/route behavior works.</h4>
 
-bundle install 
-rake db:create 
-rake db:migrate 
-rake db:seed 
-rails s 
+<p>To use this app, clone it into your local repository, then run:</p>
+
+<ul>
+<li>bundle install </li>
+<li>rake db:create </li>
+<li>rake db:migrate </li>
+<li>rake db:seed </li>
+<li>rails s </li>
+</ul>
 
 And you should be good to go to localhost:3000!  Feel free to navigate through the application while viewing the code here on Github.  The .rb files are heavily commented to narrate the process that is occurring.
 
